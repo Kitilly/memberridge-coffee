@@ -1,0 +1,391 @@
+import { images } from "@/lib/images";
+import type { Product } from "@/lib/types";
+
+const galleryPool = [
+  images.productOriginA,
+  images.productOriginB,
+  images.productBlendA,
+  images.productEspressoA,
+  images.productBeansMacro,
+  images.productFlatLay,
+];
+
+function gallery(offset: number, count = 4) {
+  const set: string[] = [];
+  for (let i = 0; i < count; i++) {
+    set.push(galleryPool[(offset + i) % galleryPool.length]);
+  }
+  return set;
+}
+
+const sampleReviews: Product["reviews"] = [
+  {
+    author: "Naomi R.",
+    location: "Portland, OR",
+    rating: 5,
+    date: "2026-06-02",
+    title: "Genuinely tastes like the tasting notes",
+    body: "I've bought a lot of single origin coffee that promises stone fruit and delivers cardboard. This is the rare bag that reads exactly as described — bright on the front, syrupy on the finish.",
+    verified: true,
+  },
+  {
+    author: "Marcus T.",
+    location: "Chicago, IL",
+    rating: 5,
+    date: "2026-05-14",
+    title: "Roast date on the bag matters",
+    body: "Ordered on a Tuesday, roasted the same week, arrived Friday. That freshness is obvious in the crema. Grind selector made pour-over dialing in painless.",
+    verified: true,
+  },
+  {
+    author: "Elena V.",
+    location: "Austin, TX",
+    rating: 4,
+    date: "2026-04-27",
+    title: "Excellent, slightly pricier than my usual",
+    body: "Worth the difference for a weekend coffee. I keep a cheaper daily bag and save this one for Saturday mornings with the Chemex.",
+    verified: true,
+  },
+];
+
+export const products: Product[] = [
+  {
+    id: "p1",
+    slug: "ridgeline-yirgacheffe",
+    name: "Ridgeline Yirgacheffe",
+    category: "single-origin",
+    badges: ["Best Seller"],
+    shortDescription:
+      "Jasmine and bergamot up front, a clean citrus body, and a honeyed finish that lingers.",
+    description: [
+      "Grown above 1,900 meters on the terraced hillsides outside Yirgacheffe, this lot is washed within hours of picking and dried slowly on raised beds — the process responsible for its clarity.",
+      "We work with the same collective of smallholder farmers each harvest, paying above the regional composite price to keep the relationship — and the quality — consistent year over year.",
+    ],
+    origin: {
+      country: "Ethiopia",
+      region: "Yirgacheffe, Gedeo Zone",
+      producer: "Konga Smallholder Collective",
+      altitude: "1,900–2,100 masl",
+      variety: "Heirloom Ethiopian Landrace",
+      process: "Washed",
+      harvestSeason: "October – December",
+    },
+    roastLevel: "Light",
+    flavorNotes: ["Jasmine", "Bergamot", "Meyer Lemon", "Honey"],
+    profile: { acidity: 5, sweetness: 4, body: 2 },
+    brewRecommendations: ["Pour Over", "Chemex", "AeroPress"],
+    grindOptions: ["Whole Bean", "Filter / Drip", "Pour Over", "Espresso", "French Press"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 2200 },
+      { label: "500g", grams: 500, priceCents: 4000 },
+      { label: "1kg", grams: 1000, priceCents: 7400 },
+    ],
+    images: gallery(0),
+    rating: 4.8,
+    reviewCount: 214,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p2",
+    slug: "tarrazu-highland-reserve",
+    name: "Tarrazú Highland Reserve",
+    category: "single-origin",
+    shortDescription:
+      "A structured, syrupy cup — brown sugar and red apple with a cocoa-dusted finish.",
+    description: [
+      "Tarrazú's volcanic soil and pronounced dry season give this coffee an unusually dense bean and a correspondingly heavy body for a washed process.",
+      "This lot is honey-processed — pulped with mucilage left intact during drying — which adds the round sweetness that carries through hot or as the base of a cold brew.",
+    ],
+    origin: {
+      country: "Costa Rica",
+      region: "Tarrazú, San José Province",
+      producer: "Finca Los Robles",
+      altitude: "1,600–1,850 masl",
+      variety: "Caturra, Catuaí",
+      process: "Honey",
+      harvestSeason: "December – February",
+    },
+    roastLevel: "Medium",
+    flavorNotes: ["Brown Sugar", "Red Apple", "Cocoa", "Almond"],
+    profile: { acidity: 3, sweetness: 5, body: 4 },
+    brewRecommendations: ["Chemex", "French Press", "Drip"],
+    grindOptions: ["Whole Bean", "Filter / Drip", "Pour Over", "Espresso", "French Press"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 2100 },
+      { label: "500g", grams: 500, priceCents: 3800 },
+      { label: "1kg", grams: 1000, priceCents: 7000 },
+    ],
+    images: gallery(1),
+    rating: 4.7,
+    reviewCount: 156,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p3",
+    slug: "kirinyaga-peak",
+    name: "Kirinyaga Peak",
+    category: "single-origin",
+    badges: ["Limited Release"],
+    shortDescription:
+      "Blackcurrant and tomato-vine acidity with a wine-like body — bold and unmistakably Kenyan.",
+    description: [
+      "Sourced from a single washing station on the southeastern slopes of Mount Kenya, where the SL28 and SL34 varieties produce the blackcurrant intensity the region is known for.",
+      "Limited to what the season yields — once this lot sells through, it won't return until next year's harvest.",
+    ],
+    origin: {
+      country: "Kenya",
+      region: "Kirinyaga County",
+      producer: "Kiangoi Washing Station",
+      altitude: "1,750–1,950 masl",
+      variety: "SL28, SL34",
+      process: "Washed, Double Fermentation",
+      harvestSeason: "October – December",
+    },
+    roastLevel: "Light-Medium",
+    flavorNotes: ["Blackcurrant", "Tomato Vine", "Grapefruit", "Molasses"],
+    profile: { acidity: 5, sweetness: 3, body: 4 },
+    brewRecommendations: ["Pour Over", "AeroPress", "Chemex"],
+    grindOptions: ["Whole Bean", "Filter / Drip", "Pour Over", "Espresso"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 2600 },
+      { label: "500g", grams: 500, priceCents: 4800 },
+    ],
+    images: gallery(2),
+    rating: 4.9,
+    reviewCount: 98,
+    subscriptionDiscountPercent: 5,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p4",
+    slug: "huila-sunrise",
+    name: "Huila Sunrise",
+    category: "single-origin",
+    shortDescription: "Caramel and orange blossom with a silky, approachable body.",
+    description: [
+      "A gentle, everyday-drinkable single origin from the mountains of Huila, where afternoon fog slows cherry ripening and concentrates sugars.",
+      "Fully washed and patio-dried, it's the coffee we hand to guests who say they 'don't really like specialty coffee' — and watch them come around.",
+    ],
+    origin: {
+      country: "Colombia",
+      region: "Huila",
+      producer: "Cooperativa San Adolfo",
+      altitude: "1,500–1,800 masl",
+      variety: "Castillo, Caturra",
+      process: "Washed",
+      harvestSeason: "April – June",
+    },
+    roastLevel: "Medium",
+    flavorNotes: ["Caramel", "Orange Blossom", "Milk Chocolate"],
+    profile: { acidity: 3, sweetness: 4, body: 3 },
+    brewRecommendations: ["Drip", "French Press", "Pour Over"],
+    grindOptions: ["Whole Bean", "Filter / Drip", "Pour Over", "Espresso", "French Press"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 1900 },
+      { label: "500g", grams: 500, priceCents: 3400 },
+      { label: "1kg", grams: 1000, priceCents: 6200 },
+    ],
+    images: gallery(3),
+    rating: 4.6,
+    reviewCount: 187,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p5",
+    slug: "morning-ridge-blend",
+    name: "Morning Ridge Blend",
+    category: "blend",
+    badges: ["Best Seller"],
+    shortDescription:
+      "Our house daily-drinker — Brazilian body underneath Ethiopian brightness.",
+    description: [
+      "Built to hold up to milk without disappearing, Morning Ridge pairs a natural Brazilian for weight with a washed Ethiopian for lift.",
+      "Roasted in small batches twice weekly so the blend ratio — and the cup — stays consistent bag to bag.",
+    ],
+    origin: {
+      country: "Brazil & Ethiopia",
+      region: "Cerrado Mineiro & Sidamo",
+      producer: "Multiple smallholder lots",
+      altitude: "1,100–2,000 masl",
+      variety: "Mundo Novo, Heirloom",
+      process: "Natural & Washed",
+      harvestSeason: "Year-round blend",
+    },
+    roastLevel: "Medium",
+    flavorNotes: ["Hazelnut", "Dried Cherry", "Brown Butter"],
+    profile: { acidity: 2, sweetness: 4, body: 4 },
+    brewRecommendations: ["Drip", "French Press", "Espresso"],
+    grindOptions: ["Whole Bean", "Filter / Drip", "Espresso", "French Press"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 1800 },
+      { label: "500g", grams: 500, priceCents: 3200 },
+      { label: "1kg", grams: 1000, priceCents: 5800 },
+    ],
+    images: gallery(4),
+    rating: 4.7,
+    reviewCount: 341,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p6",
+    slug: "dusk-blend",
+    name: "Dusk Blend",
+    category: "blend",
+    shortDescription: "Dark chocolate and toasted pecan — our slow-evening cup.",
+    description: [
+      "A darker roast profile built for French press and cold brew, where the extra roast development translates to a rounder, lower-acid cup.",
+      "Sumatran wet-hulled beans give it the earthy backbone; a touch of Guatemalan keeps it from tipping into bitterness.",
+    ],
+    origin: {
+      country: "Indonesia & Guatemala",
+      region: "Sumatra & Huehuetenango",
+      producer: "Multiple smallholder lots",
+      altitude: "1,300–1,700 masl",
+      variety: "Typica, Bourbon",
+      process: "Wet-Hulled & Washed",
+      harvestSeason: "Year-round blend",
+    },
+    roastLevel: "Medium-Dark",
+    flavorNotes: ["Dark Chocolate", "Toasted Pecan", "Cedar"],
+    profile: { acidity: 2, sweetness: 3, body: 5 },
+    brewRecommendations: ["French Press", "Cold Brew", "Drip"],
+    grindOptions: ["Whole Bean", "French Press", "Cold Brew", "Filter / Drip"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 1800 },
+      { label: "500g", grams: 500, priceCents: 3200 },
+      { label: "1kg", grams: 1000, priceCents: 5800 },
+    ],
+    images: gallery(5),
+    rating: 4.5,
+    reviewCount: 129,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p7",
+    slug: "signature-espresso",
+    name: "Signature Espresso",
+    category: "espresso",
+    badges: ["Best Seller"],
+    shortDescription: "Balanced shot with a marzipan sweetness — built for milk and straight alike.",
+    description: [
+      "Three years of iteration went into this blend ratio. It pulls a forgiving shot with a wide extraction window, so it's as suited to a home portafilter as a café's volume bar.",
+      "Crema holds for the full drink, and the marzipan sweetness cuts cleanly through milk without getting lost.",
+    ],
+    origin: {
+      country: "Brazil, Colombia & Ethiopia",
+      region: "Cerrado, Huila & Sidamo",
+      producer: "Multiple smallholder lots",
+      altitude: "1,200–2,000 masl",
+      variety: "Mundo Novo, Castillo, Heirloom",
+      process: "Natural & Washed",
+      harvestSeason: "Year-round blend",
+    },
+    roastLevel: "Medium-Dark",
+    flavorNotes: ["Marzipan", "Milk Chocolate", "Dried Fig"],
+    profile: { acidity: 2, sweetness: 4, body: 4 },
+    brewRecommendations: ["Espresso", "Moka Pot"],
+    grindOptions: ["Whole Bean", "Espresso"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 2000 },
+      { label: "500g", grams: 500, priceCents: 3600 },
+      { label: "1kg", grams: 1000, priceCents: 6600 },
+    ],
+    images: gallery(0, 3),
+    rating: 4.8,
+    reviewCount: 402,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p8",
+    slug: "midnight-roast-espresso",
+    name: "Midnight Roast Espresso",
+    category: "espresso",
+    shortDescription: "Bold, low-acid, built for those who take it black.",
+    description: [
+      "Roasted a shade past Signature Espresso for drinkers who want smoke and bittersweet cocoa up front rather than fruit.",
+      "Holds its structure in an oat or whole milk flat white without turning ashy — a common failure point with darker roasts.",
+    ],
+    origin: {
+      country: "Brazil & Sumatra",
+      region: "Cerrado Mineiro & Sumatra",
+      producer: "Multiple smallholder lots",
+      altitude: "1,100–1,600 masl",
+      variety: "Mundo Novo, Typica",
+      process: "Natural & Wet-Hulled",
+      harvestSeason: "Year-round blend",
+    },
+    roastLevel: "Dark",
+    flavorNotes: ["Bittersweet Cocoa", "Smoke", "Blackstrap Molasses"],
+    profile: { acidity: 1, sweetness: 3, body: 5 },
+    brewRecommendations: ["Espresso", "Moka Pot", "French Press"],
+    grindOptions: ["Whole Bean", "Espresso", "French Press"],
+    sizes: [
+      { label: "250g", grams: 250, priceCents: 1900 },
+      { label: "500g", grams: 500, priceCents: 3400 },
+      { label: "1kg", grams: 1000, priceCents: 6200 },
+    ],
+    images: gallery(1, 3),
+    rating: 4.6,
+    reviewCount: 88,
+    subscriptionDiscountPercent: 10,
+    reviews: sampleReviews,
+  },
+  {
+    id: "p9",
+    slug: "panama-esmeralda-lot",
+    name: "Panamá Esmeralda Lot",
+    category: "single-origin",
+    badges: ["Limited Release", "New"],
+    shortDescription: "Geisha variety — jasmine tea, peach, and a floral finish that borders on perfume.",
+    description: [
+      "A small, competition-grade Geisha lot from the highlands of Boquete, sold in limited weekly batches while the harvest lasts.",
+      "This is the coffee we hand-brew as a single cup rather than batch — the delicacy is easy to bury in a large pot.",
+    ],
+    origin: {
+      country: "Panamá",
+      region: "Boquete, Chiriquí",
+      producer: "Finca La Neblina",
+      altitude: "1,600–1,750 masl",
+      variety: "Geisha",
+      process: "Washed",
+      harvestSeason: "January – March",
+    },
+    roastLevel: "Light",
+    flavorNotes: ["Jasmine Tea", "White Peach", "Honeysuckle"],
+    profile: { acidity: 4, sweetness: 5, body: 2 },
+    brewRecommendations: ["Pour Over", "AeroPress"],
+    grindOptions: ["Whole Bean", "Pour Over", "Filter / Drip"],
+    sizes: [
+      { label: "100g", grams: 100, priceCents: 2800 },
+      { label: "250g", grams: 250, priceCents: 6200 },
+    ],
+    images: gallery(2, 3),
+    rating: 4.9,
+    reviewCount: 41,
+    subscriptionDiscountPercent: 0,
+    reviews: sampleReviews,
+  },
+];
+
+export function getProductBySlug(slug: string) {
+  return products.find((p) => p.slug === slug);
+}
+
+export function getRelatedProducts(product: Product, count = 4) {
+  return products
+    .filter((p) => p.id !== product.id)
+    .sort((a, b) =>
+      a.category === product.category && b.category !== product.category ? -1 : 1
+    )
+    .slice(0, count);
+}
+
+export function getBestSellers() {
+  return products.filter((p) => p.badges?.includes("Best Seller"));
+}
