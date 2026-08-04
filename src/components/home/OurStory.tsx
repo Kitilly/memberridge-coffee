@@ -35,7 +35,7 @@ export function OurStory() {
           </h2>
           <p className="mt-6 text-coffee leading-relaxed">
             Every bean carries the fingerprints of the person who grew it —
-            the altitude of their farm, the year's rainfall, the hour they
+            the altitude of their farm, the year&rsquo;s rainfall, the hour they
             chose to pick. Our work starts by listening to that story, then
             roasting carefully enough not to talk over it.
           </p>

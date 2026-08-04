@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { SlidersHorizontal, X } from "lucide-react";
 import { ProductCard } from "@/components/product/ProductCard";
 import type { Category, Product, RoastLevel } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 const categoryLabels: Record<Category, string> = {
   "single-origin": "Single Origin",

@@ -27,7 +27,7 @@ export function Hero() {
         </h1>
         <p className="mt-6 max-w-md text-cream/85 text-[1.05rem] leading-relaxed animate-fade-up [animation-delay:220ms]">
           Ethically sourced beans, meticulously roasted in small batches —
-          every bag begins with a farmer's story.
+          every bag begins with a farmer&rsquo;s story.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 animate-fade-up [animation-delay:320ms]">
           <LinkButton href="/coffee" variant="inverse">

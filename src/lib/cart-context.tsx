@@ -53,6 +53,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time client hydration from localStorage
       if (raw) setLines(JSON.parse(raw));
     } catch {
       // ignore corrupt storage
