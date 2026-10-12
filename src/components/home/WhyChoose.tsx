@@ -47,8 +47,8 @@ export function WhyChoose() {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           {reasons.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="text-center flex flex-col items-center">
-              <Icon size={26} strokeWidth={1.2} className="text-copper mb-5" />
+            <div key={title} className="text-center flex flex-col items-center reveal">
+              <Icon size={26} strokeWidth={1.2} className="text-copper-ink mb-5" />
               <h3 className="font-display text-xl mb-2">{title}</h3>
               <p className="text-sm text-coffee leading-relaxed max-w-[240px]">
                 {body}

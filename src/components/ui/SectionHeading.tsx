@@ -27,7 +27,7 @@ export function SectionHeading({
         <p
           className={cn(
             "eyebrow mb-4",
-            tone === "dark" ? "text-copper" : "text-gold"
+            tone === "dark" ? "text-copper-ink" : "text-gold"
           )}
         >
           {eyebrow}
@@ -35,7 +35,7 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "font-display text-4xl sm:text-5xl font-light leading-[1.1]",
+          "font-display text-4xl sm:text-5xl leading-[1.1]",
           tone === "dark" ? "text-espresso" : "text-ivory"
         )}
       >

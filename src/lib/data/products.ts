@@ -1,31 +1,14 @@
 import { images } from "@/lib/images";
 import type { Product } from "@/lib/types";
 
-const galleryPool = [
-  images.productOriginA,
-  images.productOriginB,
-  images.productBlendA,
-  images.productEspressoA,
-  images.productBeansMacro,
-  images.productFlatLay,
-];
-
-function gallery(offset: number, count = 4) {
-  const set: string[] = [];
-  for (let i = 0; i < count; i++) {
-    set.push(galleryPool[(offset + i) % galleryPool.length]);
-  }
-  return set;
-}
-
-const sampleReviews: Product["reviews"] = [
+const filterReviews: Product["reviews"] = [
   {
     author: "Naomi R.",
     location: "Portland, OR",
     rating: 5,
     date: "2026-06-02",
     title: "Genuinely tastes like the tasting notes",
-    body: "I've bought a lot of single origin coffee that promises stone fruit and delivers cardboard. This is the rare bag that reads exactly as described — bright on the front, syrupy on the finish.",
+    body: "I've bought a lot of single origin coffee that promises fruit and delivers cardboard. This is the rare bag that reads exactly as described — bright on the front, syrupy on the finish.",
     verified: true,
   },
   {
@@ -34,7 +17,7 @@ const sampleReviews: Product["reviews"] = [
     rating: 5,
     date: "2026-05-14",
     title: "Roast date on the bag matters",
-    body: "Ordered on a Tuesday, roasted the same week, arrived Friday. That freshness is obvious in the crema. Grind selector made pour-over dialing in painless.",
+    body: "Ordered on a Tuesday, roasted the same week, arrived Friday. The grind selector made dialing in my pour-over painless — first cup was already close.",
     verified: true,
   },
   {
@@ -44,6 +27,66 @@ const sampleReviews: Product["reviews"] = [
     date: "2026-04-27",
     title: "Excellent, slightly pricier than my usual",
     body: "Worth the difference for a weekend coffee. I keep a cheaper daily bag and save this one for Saturday mornings with the Chemex.",
+    verified: true,
+  },
+];
+
+const blendReviews: Product["reviews"] = [
+  {
+    author: "Jonah K.",
+    location: "Denver, CO",
+    rating: 5,
+    date: "2026-06-11",
+    title: "Finally a daily coffee that holds up to milk",
+    body: "Our household drinks it two ways — black from the drip machine and with oat milk in the morning. It doesn't disappear under the milk, which is what I was after.",
+    verified: true,
+  },
+  {
+    author: "Ruth A.",
+    location: "Minneapolis, MN",
+    rating: 5,
+    date: "2026-05-02",
+    title: "Consistent bag to bag",
+    body: "I'm on my fifth subscription delivery and they've all tasted the same, which sounds like faint praise until you've had a blend drift on you.",
+    verified: true,
+  },
+  {
+    author: "Theo M.",
+    location: "Raleigh, NC",
+    rating: 4,
+    date: "2026-03-29",
+    title: "Comforting, not boring",
+    body: "Nutty and round with a little fruit if you go looking for it. Exactly what I want at 6am — I just wish the 1kg bag came with a resealable zip.",
+    verified: true,
+  },
+];
+
+const espressoReviews: Product["reviews"] = [
+  {
+    author: "Sarah L.",
+    location: "Seattle, WA",
+    rating: 5,
+    date: "2026-06-20",
+    title: "Forgiving in the best way",
+    body: "Pulls a good shot across a surprisingly wide grind range on my home machine. The crema holds through a flat white and the sweetness cuts through milk.",
+    verified: true,
+  },
+  {
+    author: "Diego P.",
+    location: "San Diego, CA",
+    rating: 5,
+    date: "2026-05-23",
+    title: "Café quality at home",
+    body: "Ground for espresso and it was dialed in on the second shot. Ratio of 18g in, 38g out at 28 seconds has been my sweet spot.",
+    verified: true,
+  },
+  {
+    author: "Hannah W.",
+    location: "Boston, MA",
+    rating: 4,
+    date: "2026-04-15",
+    title: "Great with milk, intense straight",
+    body: "Lovely in a cortado. On its own it's a lot — which I think is the point. Rest the bag a few days after it arrives for the best shots.",
     verified: true,
   },
 ];
@@ -80,11 +123,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 4000 },
       { label: "1kg", grams: 1000, priceCents: 7400 },
     ],
-    images: gallery(0),
+    images: [images.cupShadow, images.beansScatter, images.carafePour, images.beansSpill],
     rating: 4.8,
     reviewCount: 214,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: filterReviews,
   },
   {
     id: "p2",
@@ -116,11 +159,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 3800 },
       { label: "1kg", grams: 1000, priceCents: 7000 },
     ],
-    images: gallery(1),
+    images: [images.beansMacro, images.espressoSunlight, images.beansDark, images.cupShadow],
     rating: 4.7,
     reviewCount: 156,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: filterReviews,
   },
   {
     id: "p3",
@@ -152,11 +195,11 @@ export const products: Product[] = [
       { label: "250g", grams: 250, priceCents: 2600 },
       { label: "500g", grams: 500, priceCents: 4800 },
     ],
-    images: gallery(2),
+    images: [images.carafePour, images.beansDense, images.cupShadow, images.beansSpill],
     rating: 4.9,
     reviewCount: 98,
     subscriptionDiscountPercent: 5,
-    reviews: sampleReviews,
+    reviews: filterReviews,
   },
   {
     id: "p4",
@@ -187,11 +230,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 3400 },
       { label: "1kg", grams: 1000, priceCents: 6200 },
     ],
-    images: gallery(3),
+    images: [images.cupInBeans, images.beansScatter, images.espressoSunlight, images.carafePour],
     rating: 4.6,
     reviewCount: 187,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: filterReviews,
   },
   {
     id: "p5",
@@ -224,11 +267,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 3200 },
       { label: "1kg", grams: 1000, priceCents: 5800 },
     ],
-    images: gallery(4),
+    images: [images.beansSpill, images.beansWood, images.handCup, images.cupInBeans],
     rating: 4.7,
     reviewCount: 341,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: blendReviews,
   },
   {
     id: "p6",
@@ -259,11 +302,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 3200 },
       { label: "1kg", grams: 1000, priceCents: 5800 },
     ],
-    images: gallery(5),
+    images: [images.beansWood, images.beansMacro, images.carafePour, images.beansBoard],
     rating: 4.5,
     reviewCount: 129,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: blendReviews,
   },
   {
     id: "p7",
@@ -295,11 +338,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 3600 },
       { label: "1kg", grams: 1000, priceCents: 6600 },
     ],
-    images: gallery(0, 3),
+    images: [images.espressoSunlight, images.beansMacro, images.beansDark, images.cupInBeans],
     rating: 4.8,
     reviewCount: 402,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: espressoReviews,
   },
   {
     id: "p8",
@@ -330,11 +373,11 @@ export const products: Product[] = [
       { label: "500g", grams: 500, priceCents: 3400 },
       { label: "1kg", grams: 1000, priceCents: 6200 },
     ],
-    images: gallery(1, 3),
+    images: [images.beansDark, images.espressoSunlight, images.beansWood, images.beansBoard],
     rating: 4.6,
     reviewCount: 88,
     subscriptionDiscountPercent: 10,
-    reviews: sampleReviews,
+    reviews: espressoReviews,
   },
   {
     id: "p9",
@@ -365,11 +408,11 @@ export const products: Product[] = [
       { label: "100g", grams: 100, priceCents: 2800 },
       { label: "250g", grams: 250, priceCents: 6200 },
     ],
-    images: gallery(2, 3),
+    images: [images.beansDense, images.cupShadow, images.carafePour, images.handCup],
     rating: 4.9,
     reviewCount: 41,
     subscriptionDiscountPercent: 0,
-    reviews: sampleReviews,
+    reviews: filterReviews,
   },
 ];
 

@@ -15,7 +15,7 @@ export function BrewingExperience() {
           tone="light"
         />
 
-        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 reveal">
           {brewMethods.map((method) => (
             <Link
               key={method.slug}

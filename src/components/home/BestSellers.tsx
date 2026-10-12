@@ -5,11 +5,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/product/ProductCard";
-import { getBestSellers } from "@/lib/data/products";
+import { products } from "@/lib/data/products";
+
+// Most-reviewed first — the coffees people actually reorder.
+const sellers = [...products].sort((a, b) => b.reviewCount - a.reviewCount).slice(0, 6);
 
 export function BestSellers() {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const sellers = getBestSellers();
 
   const scrollBy = (dir: 1 | -1) => {
     scrollerRef.current?.scrollBy({ left: dir * 340, behavior: "smooth" });
@@ -40,7 +42,7 @@ export function BestSellers() {
 
         <div
           ref={scrollerRef}
-          className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar reveal"
         >
           {sellers.map((product) => (
             <div key={product.id} className="w-[78%] sm:w-[42%] lg:w-[27%] shrink-0 snap-start">

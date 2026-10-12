@@ -2,86 +2,129 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Star } from "lucide-react";
+import { Heart, Plus, Star } from "lucide-react";
 import type { Product } from "@/lib/types";
-import { formatPrice, cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 
-export function ProductCard({ product }: { product: Product }) {
+type CompareProps = { active: boolean; disabled: boolean; onToggle: () => void };
+
+export function ProductCard({
+  product,
+  compare,
+  sizes = "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw",
+}: {
+  product: Product;
+  compare?: CompareProps;
+  sizes?: string;
+}) {
   const { addItem } = useCart();
   const { toggle, has } = useWishlist();
   const wished = has(product.slug);
+  const href = `/coffee/${product.slug}`;
+  const quickAdd = () => addItem({ product, sizeIndex: 0, grind: "Whole Bean" });
+
+  const image = (
+    <Image
+      src={product.images[0]}
+      alt={`${product.name}, ${product.origin.country}`}
+      fill
+      sizes={sizes}
+      className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+    />
+  );
 
   return (
-    <div className="group relative">
+    <article className="group relative">
       <div className="relative aspect-[4/5] overflow-hidden bg-cream">
-        <Link href={`/coffee/${product.slug}`} className="relative block h-full w-full">
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            fill
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
+        <Link href={href} className="relative block h-full w-full" tabIndex={-1} aria-hidden>
+          {image}
         </Link>
 
         {product.badges && product.badges.length > 0 && (
-          <span className="absolute top-4 left-4 eyebrow bg-ivory/90 text-espresso px-3 py-1.5">
+          <span className="absolute top-4 left-4 eyebrow !text-[0.65rem] bg-ivory/95 text-espresso px-2.5 py-1.5">
             {product.badges[0]}
           </span>
         )}
 
         <button
           onClick={() => toggle(product.slug)}
-          aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
+          aria-label={wished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
           aria-pressed={wished}
-          className="absolute top-4 right-4 h-9 w-9 flex items-center justify-center bg-ivory/90 text-espresso hover:text-copper transition-colors"
+          className={cn(
+            "absolute top-3 right-3 h-9 w-9 flex items-center justify-center bg-ivory/95 transition-colors",
+            wished ? "text-copper-ink" : "text-espresso hover:text-copper-ink"
+          )}
         >
           <Heart size={16} strokeWidth={1.5} fill={wished ? "currentColor" : "none"} />
         </button>
 
-        <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out flex">
+        {/* Pointer devices: reveal on hover or keyboard focus. */}
+        <div className="absolute inset-x-0 bottom-0 hidden [@media(hover:hover)]:flex translate-y-full group-hover:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
           <button
-            onClick={() =>
-              addItem({ product, sizeIndex: 0, grind: "Whole Bean" })
-            }
-            className="flex-1 bg-espresso text-ivory text-[0.75rem] uppercase tracking-[0.14em] py-3 hover:bg-roast transition-colors"
+            onClick={quickAdd}
+            className="flex-1 bg-espresso text-ivory text-[0.72rem] uppercase tracking-[0.14em] py-3.5 hover:bg-roast transition-colors"
           >
-            Quick Add
+            Quick Add · <span className="tabular">{formatPrice(product.sizes[0].priceCents)}</span>
           </button>
           <Link
-            href={`/coffee/${product.slug}`}
-            className="flex-1 bg-cream text-espresso text-[0.75rem] uppercase tracking-[0.14em] py-3 text-center hover:bg-sage/40 transition-colors"
+            href={href}
+            className="flex-1 bg-ivory text-espresso text-[0.72rem] uppercase tracking-[0.14em] py-3.5 text-center hover:bg-cream transition-colors"
           >
             View Details
           </Link>
         </div>
+
+        {/* Touch devices: always-visible quick add. */}
+        <button
+          onClick={quickAdd}
+          aria-label={`Quick add ${product.name}, ${product.sizes[0].label}`}
+          className="[@media(hover:hover)]:hidden absolute bottom-3 right-3 h-10 w-10 flex items-center justify-center bg-espresso text-ivory"
+        >
+          <Plus size={18} strokeWidth={1.5} />
+        </button>
       </div>
 
       <div className="mt-4">
-        <div className="flex items-start justify-between gap-2">
-          <Link href={`/coffee/${product.slug}`}>
-            <h3 className="font-display text-lg leading-snug text-espresso link-underline">
-              {product.name}
-            </h3>
+        <h3 className="font-display text-[1.45rem] leading-tight">
+          <Link href={href} className="link-underline">
+            {product.name}
           </Link>
-        </div>
+        </h3>
         <p className="text-sm text-coffee mt-1">
-          {product.origin.country} · {product.roastLevel} Roast
+          {product.origin.country} · {product.roastLevel}
         </p>
-        <div className="flex items-center justify-between mt-2">
-          <div className="flex items-center gap-1 text-copper">
-            <Star size={13} fill="currentColor" strokeWidth={0} />
-            <span className="text-xs text-coffee">
-              {product.rating.toFixed(1)} ({product.reviewCount})
+        <p className="text-xs text-espresso/55 mt-1 truncate">{product.flavorNotes.join(", ")}</p>
+        <div className="flex items-center justify-between mt-3">
+          <div className="flex items-center gap-1.5">
+            <Star size={13} fill="currentColor" strokeWidth={0} className="text-copper" aria-hidden />
+            <span className="text-xs text-coffee tabular">
+              {product.rating.toFixed(1)}
+              <span className="sr-only"> out of 5,</span> ({product.reviewCount}
+              <span className="sr-only"> reviews</span>)
             </span>
           </div>
-          <span className={cn("text-sm font-medium")}>
-            {formatPrice(product.sizes[0].priceCents)}
-          </span>
+          <span className="text-sm font-medium tabular">from {formatPrice(product.sizes[0].priceCents)}</span>
         </div>
+        {compare && (
+          <label
+            className={cn(
+              "mt-3 inline-flex items-center gap-2 text-xs text-coffee cursor-pointer select-none",
+              compare.disabled && !compare.active && "opacity-40 cursor-not-allowed"
+            )}
+          >
+            <input
+              type="checkbox"
+              checked={compare.active}
+              disabled={compare.disabled && !compare.active}
+              onChange={compare.onToggle}
+              className="h-3.5 w-3.5 accent-espresso"
+            />
+            Compare
+          </label>
+        )}
       </div>
-    </div>
+    </article>
   );
 }

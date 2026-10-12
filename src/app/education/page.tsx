@@ -39,14 +39,14 @@ export default function EducationPage() {
           src={images.storyBeans}
           alt="Close-up of roasted coffee beans"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-espresso/50" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Learn</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-ivory">
+          <h1 className="font-display text-5xl sm:text-6xl text-ivory">
             Coffee Education
           </h1>
         </div>

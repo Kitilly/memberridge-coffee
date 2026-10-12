@@ -32,14 +32,14 @@ export default async function CoffeePage({
           src={images.heroCoffeeCollection}
           alt="Roasted coffee beans arranged in a shallow dish"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-espresso/45" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Shop</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-ivory">
+          <h1 className="font-display text-5xl sm:text-6xl text-ivory">
             The Coffee Collection
           </h1>
         </div>

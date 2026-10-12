@@ -1,4 +1,5 @@
 import type { Profile } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 const rows: { key: keyof Profile; label: string }[] = [
   { key: "acidity", label: "Acidity" },
@@ -6,24 +7,23 @@ const rows: { key: keyof Profile; label: string }[] = [
   { key: "body", label: "Body" },
 ];
 
-export function ProductProfile({ profile }: { profile: Profile }) {
+export function ProductProfile({ profile, compact = false }: { profile: Profile; compact?: boolean }) {
   return (
-    <div className="space-y-3">
+    <dl className={cn(compact ? "space-y-1.5" : "space-y-3")}>
       {rows.map(({ key, label }) => (
         <div key={key} className="flex items-center gap-4">
-          <span className="text-sm text-coffee w-24 shrink-0">{label}</span>
-          <div className="flex gap-1.5 flex-1">
+          <dt className={cn("text-coffee shrink-0", compact ? "text-xs w-16" : "text-sm w-24")}>{label}</dt>
+          <dd className="flex gap-1 flex-1" aria-label={`${profile[key]} out of 5`}>
             {[1, 2, 3, 4, 5].map((i) => (
               <span
                 key={i}
-                className={`h-1.5 flex-1 ${
-                  i <= profile[key] ? "bg-copper" : "bg-espresso/10"
-                }`}
+                aria-hidden
+                className={cn(compact ? "h-1" : "h-1.5", "flex-1", i <= profile[key] ? "bg-copper" : "bg-espresso/10")}
               />
             ))}
-          </div>
+          </dd>
         </div>
       ))}
-    </div>
+    </dl>
   );
 }

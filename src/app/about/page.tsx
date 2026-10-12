@@ -4,7 +4,9 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { LinkButton } from "@/components/ui/Button";
 import { FarmOrigins } from "@/components/home/FarmOrigins";
+import { CoffeeBeltMap } from "@/components/home/CoffeeBeltMap";
 import { images } from "@/lib/images";
+import { Stats } from "@/components/home/Stats";
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -58,14 +60,14 @@ export default function AboutPage() {
           src={images.heroAbout}
           alt="Terraced coffee farmland on a misty mountainside"
           fill
-          priority
+          preload
           sizes="100vw"
-          className="object-cover"
+          className="object-cover animate-slow-zoom"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/20 to-espresso/30" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Our Story</p>
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-ivory leading-[1.05] max-w-2xl">
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl text-ivory leading-[1.05] max-w-2xl">
             Every Bean Has a Story
           </h1>
         </div>
@@ -79,6 +81,12 @@ export default function AboutPage() {
             grew it — the altitude, the harvest, the hour it was picked. Our
             work is to protect that story from farm to cup.
           </p>
+        </Container>
+      </section>
+
+      <section aria-label="Memberridge by the numbers" className="pb-28">
+        <Container>
+          <Stats />
         </Container>
       </section>
 
@@ -105,8 +113,8 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="max-w-lg">
-            <p className="eyebrow text-copper mb-4">How We Started</p>
-            <h2 className="font-display text-4xl sm:text-5xl font-light leading-[1.1] text-espresso">
+            <p className="eyebrow text-copper-ink mb-4">How We Started</p>
+            <h2 className="font-display text-4xl sm:text-5xl leading-[1.1] text-espresso">
               A relationship, not a transaction.
             </h2>
             <p className="mt-6 text-coffee leading-relaxed">
@@ -164,11 +172,11 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <FarmOrigins />
+      <FarmOrigins map={<CoffeeBeltMap />} />
 
       <section className="py-28">
         <Container className="text-center max-w-xl">
-          <h2 className="font-display text-4xl sm:text-5xl font-light leading-[1.1] text-espresso mb-6">
+          <h2 className="font-display text-4xl sm:text-5xl leading-[1.1] text-espresso mb-6">
             Taste what the relationship produces.
           </h2>
           <LinkButton href="/coffee" variant="primary">

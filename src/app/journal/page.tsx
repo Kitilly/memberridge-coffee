@@ -44,7 +44,7 @@ export default function JournalPage() {
           />
         </div>
         <div>
-          <p className="eyebrow text-copper mb-4">
+          <p className="eyebrow text-copper-ink mb-4">
             {featured.category} · {formatDate(featured.date)}
           </p>
           <h2 className="font-display text-3xl sm:text-4xl leading-tight link-underline inline">
@@ -67,7 +67,7 @@ export default function JournalPage() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-            <p className="eyebrow text-copper mt-5 mb-3">
+            <p className="eyebrow text-copper-ink mt-5 mb-3">
               {post.category} · {formatDate(post.date)}
             </p>
             <h3 className="font-display text-xl leading-snug link-underline inline">

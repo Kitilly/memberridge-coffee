@@ -7,7 +7,7 @@ export function OurStory() {
   return (
     <section className="py-28 bg-cream">
       <Container className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 reveal">
           <div className="relative aspect-[3/4] mt-12">
             <Image
               src={images.storyHands}
@@ -28,9 +28,9 @@ export function OurStory() {
           </div>
         </div>
 
-        <div className="max-w-lg">
-          <p className="eyebrow text-copper mb-4">Our Story</p>
-          <h2 className="font-display text-4xl sm:text-5xl font-light leading-[1.1] text-espresso">
+        <div className="max-w-lg reveal">
+          <p className="eyebrow text-copper-ink mb-4">Our Story</p>
+          <h2 className="font-display text-4xl sm:text-5xl leading-[1.1] text-espresso">
             Coffee begins long before the roast.
           </h2>
           <p className="mt-6 text-coffee leading-relaxed">

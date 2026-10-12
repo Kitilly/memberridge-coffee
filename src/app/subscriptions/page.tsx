@@ -43,14 +43,14 @@ export default function SubscriptionsPage() {
           src={images.cafeInterior}
           alt="Bags of Memberridge coffee arranged on a shelf"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-espresso/50" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Subscriptions</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-ivory">
+          <h1 className="font-display text-5xl sm:text-6xl text-ivory">
             Never Run Out
           </h1>
         </div>
@@ -61,7 +61,7 @@ export default function SubscriptionsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-14 mb-24">
             {benefits.map(({ icon: Icon, title, body }) => (
               <div key={title} className="text-center flex flex-col items-center">
-                <Icon size={26} strokeWidth={1.2} className="text-copper mb-5" />
+                <Icon size={26} strokeWidth={1.2} className="text-copper-ink mb-5" />
                 <h3 className="font-display text-lg mb-2">{title}</h3>
                 <p className="text-sm text-coffee leading-relaxed max-w-[220px]">
                   {body}

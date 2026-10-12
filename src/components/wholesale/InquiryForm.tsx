@@ -1,21 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-
-const inputClass =
-  "w-full border border-espresso/25 bg-transparent px-4 py-3 text-sm outline-none focus:border-espresso placeholder:text-espresso/40";
+import { Field, SelectField, TextAreaField } from "@/components/ui/Field";
 
 export function InquiryForm() {
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {
     return (
-      <div className="border border-espresso/15 p-10 text-center">
-        <h3 className="font-display text-2xl mb-3">Inquiry received</h3>
+      <div className="border border-espresso/15 bg-ivory p-10 text-center" role="status">
+        <Check size={26} strokeWidth={1.5} className="mx-auto text-olive-ink mb-4" />
+        <h3 className="font-display text-3xl mb-3">Inquiry received</h3>
         <p className="text-coffee">
-          Thank you — our wholesale team typically responds within two
-          business days.
+          Thank you — our wholesale team typically responds within two business days with pricing and sample options.
         </p>
       </div>
     );
@@ -27,40 +26,38 @@ export function InquiryForm() {
         e.preventDefault();
         setSubmitted(true);
       }}
-      className="border border-espresso/15 p-8 sm:p-10 space-y-5"
+      className="border border-espresso/15 bg-ivory p-8 sm:p-10 space-y-5"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <input required placeholder="Business name" className={inputClass} />
-        <input required placeholder="Contact name" className={inputClass} />
-        <input required type="email" placeholder="Email" className={inputClass} />
-        <input placeholder="Phone (optional)" className={inputClass} />
+        <Field label="Business name" name="business" autoComplete="organization" />
+        <Field label="Contact name" name="name" autoComplete="name" />
+        <Field label="Email" name="email" type="email" autoComplete="email" />
+        <Field label="Phone" name="phone" type="tel" autoComplete="tel" optional />
       </div>
-      <select required defaultValue="" className={inputClass}>
-        <option value="" disabled>
-          Business type
-        </option>
-        <option>Café or Restaurant</option>
-        <option>Office</option>
-        <option>Hotel or Hospitality</option>
-        <option>Retail</option>
-        <option>Other</option>
-      </select>
-      <select required defaultValue="" className={inputClass}>
-        <option value="" disabled>
-          Estimated monthly volume
-        </option>
-        <option>Under 25 lbs</option>
-        <option>25–100 lbs</option>
-        <option>100–300 lbs</option>
-        <option>300+ lbs</option>
-      </select>
-      <textarea
-        placeholder="Tell us about your business (optional)"
-        rows={4}
-        className={inputClass}
-      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <SelectField label="Business type" name="type" defaultValue="">
+          <option value="" disabled>
+            Select one
+          </option>
+          <option>Café or restaurant</option>
+          <option>Office</option>
+          <option>Hotel or hospitality</option>
+          <option>Retail</option>
+          <option>Other</option>
+        </SelectField>
+        <SelectField label="Monthly volume" name="volume" defaultValue="">
+          <option value="" disabled>
+            Select a range
+          </option>
+          <option>Under 25 lbs</option>
+          <option>25–100 lbs</option>
+          <option>100–300 lbs</option>
+          <option>300+ lbs</option>
+        </SelectField>
+      </div>
+      <TextAreaField label="Tell us about your business" name="notes" rows={4} optional />
       <Button type="submit" variant="primary" className="w-full sm:w-auto">
-        Submit Inquiry
+        Request Pricing &amp; Samples
       </Button>
     </form>
   );

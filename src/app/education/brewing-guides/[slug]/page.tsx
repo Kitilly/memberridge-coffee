@@ -39,14 +39,14 @@ export default async function BrewingGuidePage({
           src={method.image}
           alt={`${method.name} brewing method`}
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/20 to-espresso/30" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Brewing Guide</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-ivory">
+          <h1 className="font-display text-5xl sm:text-6xl text-ivory">
             {method.name}
           </h1>
         </div>
@@ -59,17 +59,17 @@ export default async function BrewingGuidePage({
 
             <dl className="space-y-4 border-t border-espresso/10 pt-6">
               <div className="flex items-center gap-3">
-                <Clock size={16} strokeWidth={1.5} className="text-copper" />
+                <Clock size={16} strokeWidth={1.5} className="text-copper-ink" />
                 <dt className="text-sm text-coffee w-20">Brew Time</dt>
                 <dd className="text-sm">{method.time}</dd>
               </div>
               <div className="flex items-center gap-3">
-                <Gauge size={16} strokeWidth={1.5} className="text-copper" />
+                <Gauge size={16} strokeWidth={1.5} className="text-copper-ink" />
                 <dt className="text-sm text-coffee w-20">Grind</dt>
                 <dd className="text-sm">{method.grind}</dd>
               </div>
               <div className="flex items-center gap-3">
-                <Scale size={16} strokeWidth={1.5} className="text-copper" />
+                <Scale size={16} strokeWidth={1.5} className="text-copper-ink" />
                 <dt className="text-sm text-coffee w-20">Ratio</dt>
                 <dd className="text-sm">{method.ratio}</dd>
               </div>

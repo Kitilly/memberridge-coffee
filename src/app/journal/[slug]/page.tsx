@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { journalPosts } from "@/lib/data/content";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { SITE } from "@/lib/site";
 
 export function generateStaticParams() {
   return journalPosts.map((p) => ({ slug: p.slug }));
@@ -15,7 +18,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = journalPosts.find((p) => p.slug === slug);
   if (!post) return {};
-  return { title: post.title, description: post.excerpt };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/journal/${post.slug}` },
+    openGraph: { type: "article", publishedTime: post.date, images: [{ url: post.image, alt: post.title }] },
+  };
 }
 
 function formatDate(date: string) {
@@ -37,11 +45,27 @@ export default async function JournalPostPage({
 
   return (
     <article>
-      <Container className="pt-16 pb-10 max-w-3xl">
-        <p className="eyebrow text-copper mb-4">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: post.title,
+          description: post.excerpt,
+          image: [post.image],
+          datePublished: post.date,
+          author: { "@type": "Organization", name: post.author },
+          publisher: { "@type": "Organization", name: SITE.name, logo: { "@type": "ImageObject", url: `${SITE.url}/icon.svg` } },
+          mainEntityOfPage: `${SITE.url}/journal/${post.slug}`,
+        }}
+      />
+      <Container className="pt-10 pb-10 max-w-3xl">
+        <div className="mb-10">
+          <Breadcrumbs items={[{ label: "Journal", href: "/journal" }, { label: post.title, href: `/journal/${post.slug}` }]} />
+        </div>
+        <p className="eyebrow text-copper-ink mb-4">
           {post.category} · {formatDate(post.date)}
         </p>
-        <h1 className="font-display text-4xl sm:text-5xl font-light leading-[1.1]">
+        <h1 className="font-display text-5xl sm:text-6xl leading-[1.05]">
           {post.title}
         </h1>
         <p className="text-sm text-espresso/50 mt-4">
@@ -55,7 +79,7 @@ export default async function JournalPostPage({
             src={post.image}
             alt={post.title}
             fill
-            priority
+            preload
             sizes="(min-width: 1024px) 60vw, 100vw"
             className="object-cover"
           />
@@ -65,7 +89,7 @@ export default async function JournalPostPage({
       <Container className="max-w-2xl pb-24">
         <div className="space-y-6">
           {post.body.map((para, i) => (
-            <p key={i} className="text-coffee leading-relaxed text-[1.05rem]">
+            <p key={i} className={i === 0 ? "font-display text-2xl leading-relaxed text-espresso" : "text-coffee leading-[1.8] text-[1.075rem]"}>
               {para}
             </p>
           ))}

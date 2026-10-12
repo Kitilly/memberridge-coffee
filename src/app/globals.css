@@ -16,9 +16,17 @@
   /* Accent */
   --color-gold: #c99846;
 
+  /* Text-safe variants: copper and olive fall below 4.5:1 on ivory at small
+     sizes, so body-size text uses these deeper shades. Keep the originals for
+     icons, rules, and fills. */
+  --color-copper-ink: #8a5323;
+  --color-olive-ink: #57603d;
+
   /* Semantic */
   --background: var(--color-ivory);
   --foreground: var(--color-espresso);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -28,20 +36,25 @@
   --color-ivory: var(--color-ivory);
   --color-coffee: var(--color-coffee);
   --color-copper: var(--color-copper);
+  --color-copper-ink: var(--color-copper-ink);
   --color-olive: var(--color-olive);
+  --color-olive-ink: var(--color-olive-ink);
   --color-sage: var(--color-sage);
   --color-gold: var(--color-gold);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-cormorant);
   --font-sans: var(--font-inter);
 
   --container-8xl: 90rem;
 
-  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-up: fade-up 0.9s var(--ease-out-expo) both;
   --animate-fade-in: fade-in 1s ease both;
+  --animate-overlay: fade-in 0.22s ease-out both;
+  --animate-page-in: page-in 0.45s ease-out backwards;
+  --animate-slow-zoom: slow-zoom 14s var(--ease-out-expo) both;
 
   @keyframes fade-up {
     from {
@@ -62,16 +75,64 @@
       opacity: 1;
     }
   }
+
+  /* Opacity only: a transform here would re-anchor position:fixed children. */
+  @keyframes page-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slow-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Cormorant is a high-contrast Garamond: it wants a little weight and tighter
+     tracking at display sizes, and old-style figures read as more editorial. */
+  .font-display {
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 3px;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline-offset: 0;
+  }
+
+  /* Prices, quantities, and tables should line up. */
+  .tabular {
+    font-variant-numeric: lining-nums tabular-nums;
+  }
 }
 
 ::selection {
@@ -81,13 +142,15 @@ body {
 
 /* Editorial underline link */
 .link-underline {
-  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
   background-repeat: no-repeat;
   background-size: 0% 1px;
-  transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-size 0.4s var(--ease-out-expo);
 }
-.link-underline:hover {
+.link-underline:hover,
+.link-underline:focus-visible,
+.group:hover .link-underline {
   background-size: 100% 1px;
 }
 
@@ -99,13 +162,41 @@ body {
   font-weight: 500;
 }
 
+/* Scroll-linked reveal. Pure CSS: browsers without scroll-driven animations
+   simply show the content, so nothing depends on JavaScript to become visible. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    animation: none !important;
   }
 }

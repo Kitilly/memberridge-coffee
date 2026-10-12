@@ -40,8 +40,9 @@ export function PlanBuilder() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div className="space-y-8">
           <div>
-            <p className="eyebrow text-espresso mb-3">1. Choose Your Coffee</p>
+            <label htmlFor="plan-coffee" className="eyebrow text-espresso mb-3 block">1. Choose Your Coffee</label>
             <select
+              id="plan-coffee"
               value={productSlug}
               onChange={(e) => {
                 setProductSlug(e.target.value);
@@ -64,6 +65,7 @@ export function PlanBuilder() {
                 <button
                   key={s.label}
                   onClick={() => setSizeIndex(i)}
+                  aria-pressed={i === sizeIndex}
                   className={cn(
                     "px-5 py-2.5 text-sm border transition-colors",
                     i === sizeIndex
@@ -84,6 +86,7 @@ export function PlanBuilder() {
                 <button
                   key={f.value}
                   onClick={() => setFrequency(f.value)}
+                  aria-pressed={frequency === f.value}
                   className={cn(
                     "px-5 py-2.5 text-sm border transition-colors",
                     frequency === f.value
@@ -100,8 +103,8 @@ export function PlanBuilder() {
 
         <div className="bg-cream p-8 flex flex-col justify-between">
           <div>
-            <p className="eyebrow text-copper mb-4">Your Plan</p>
-            <p className="font-display text-2xl mb-1">{product.name}</p>
+            <p className="eyebrow text-copper-ink mb-4">Your Plan</p>
+            <p className="font-display text-4xl mb-1">{product.name}</p>
             <p className="text-sm text-coffee mb-6">
               {size.label} · Delivered {frequencies.find((f) => f.value === frequency)?.label.toLowerCase()}
             </p>
@@ -117,7 +120,7 @@ export function PlanBuilder() {
                 <span>Subscription price</span>
                 <span>{formatPrice(discountedPrice)}</span>
               </div>
-              <p className="text-olive text-xs">
+              <p className="text-olive-ink text-xs">
                 You save {product.subscriptionDiscountPercent}% every delivery
               </p>
             </div>

@@ -43,14 +43,14 @@ export default function WholesalePage() {
           src={images.cafeInterior}
           alt="Warm, dimly lit café interior"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-espresso/50" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Wholesale</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-ivory">
+          <h1 className="font-display text-5xl sm:text-6xl text-ivory">
             Coffee for Your Business
           </h1>
         </div>
@@ -78,8 +78,8 @@ export default function WholesalePage() {
       <section className="py-28 bg-cream">
         <Container className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
-            <p className="eyebrow text-copper mb-4">What&rsquo;s Included</p>
-            <h2 className="font-display text-4xl font-light leading-[1.1] mb-8">
+            <p className="eyebrow text-copper-ink mb-4">What&rsquo;s Included</p>
+            <h2 className="font-display text-4xl leading-[1.1] mb-8">
               Every wholesale account gets
             </h2>
             <ul className="space-y-4">
@@ -92,8 +92,8 @@ export default function WholesalePage() {
             </ul>
           </div>
           <div>
-            <p className="eyebrow text-copper mb-4">Get Started</p>
-            <h2 className="font-display text-4xl font-light leading-[1.1] mb-8">
+            <p className="eyebrow text-copper-ink mb-4">Get Started</p>
+            <h2 className="font-display text-4xl leading-[1.1] mb-8">
               Tell us about your business
             </h2>
             <InquiryForm />

@@ -10,9 +10,9 @@ export function Hero() {
         src={images.heroHome}
         alt="Coffee cup beside scattered roasted beans on a wooden table, morning light"
         fill
-        priority
+        preload
         sizes="100vw"
-        className="object-cover"
+        className="object-cover animate-slow-zoom"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-espresso/20 to-espresso/40" />
 
@@ -20,7 +20,7 @@ export function Hero() {
         <p className="eyebrow text-cream/90 mb-6 animate-fade-up">
           Small-Batch Specialty Coffee
         </p>
-        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-ivory leading-[1.05] max-w-4xl animate-fade-up [animation-delay:120ms]">
+        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl text-ivory leading-[1.05] max-w-4xl animate-fade-up [animation-delay:120ms]">
           Roasted with Purpose.
           <br />
           Shared with Passion.

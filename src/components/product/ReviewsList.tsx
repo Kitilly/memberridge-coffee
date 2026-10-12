@@ -15,7 +15,7 @@ export function ReviewsList({
       <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-8 mb-12">
         <div>
           <p className="font-display text-5xl">{rating.toFixed(1)}</p>
-          <div className="flex gap-1 text-copper mt-2">
+          <div className="flex gap-1 text-copper-ink mt-2">
             {[1, 2, 3, 4, 5].map((i) => (
               <Star
                 key={i}
@@ -32,7 +32,7 @@ export function ReviewsList({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
         {reviews.map((review, i) => (
           <div key={i}>
-            <div className="flex gap-1 text-copper mb-3">
+            <div className="flex gap-1 text-copper-ink mb-3">
               {[1, 2, 3, 4, 5].map((s) => (
                 <Star
                   key={s}
@@ -48,7 +48,7 @@ export function ReviewsList({
               <span className="font-medium text-espresso">{review.author}</span>
               <span>· {review.location}</span>
               {review.verified && (
-                <span className="inline-flex items-center gap-1 text-olive">
+                <span className="inline-flex items-center gap-1 text-olive-ink">
                   <BadgeCheck size={13} /> Verified
                 </span>
               )}

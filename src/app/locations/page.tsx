@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { MapPin, Phone, Clock } from "lucide-react";
+import { ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { locations } from "@/lib/data/content";
 import { images } from "@/lib/images";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Locations",
@@ -20,19 +22,32 @@ export default function LocationsPage() {
           src={images.cafeInterior}
           alt="Memberridge café interior"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-espresso/50" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <p className="eyebrow text-cream/90 mb-4">Visit Us</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-ivory">
+          <h1 className="font-display text-5xl sm:text-6xl text-ivory">
             Locations
           </h1>
         </div>
       </section>
 
+      <JsonLd
+        data={locations.map((loc) => ({
+          "@context": "https://schema.org",
+          "@type": "CafeOrCoffeeShop",
+          name: `Memberridge Coffee — ${loc.name}`,
+          address: loc.address,
+          telephone: loc.phone,
+          url: `${SITE.url}/locations`,
+          image: loc.image,
+          servesCuisine: "Coffee",
+          parentOrganization: { "@type": "Organization", name: SITE.name },
+        }))}
+      />
       <Container className="py-20">
         <SectionHeading
           eyebrow="Find a Café"
@@ -48,7 +63,7 @@ export default function LocationsPage() {
                 i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-cream">
+              <div className="relative aspect-[4/3] overflow-hidden bg-cream reveal">
                 <Image
                   src={loc.image}
                   alt={loc.name}
@@ -58,19 +73,19 @@ export default function LocationsPage() {
                 />
               </div>
               <div>
-                <h2 className="font-display text-3xl mb-4">{loc.name}</h2>
+                <h2 className="font-display text-4xl mb-4">{loc.name}</h2>
                 <p className="text-coffee leading-relaxed mb-6">{loc.description}</p>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3 text-sm">
-                    <MapPin size={16} strokeWidth={1.5} className="text-copper mt-0.5 shrink-0" />
+                    <MapPin size={16} strokeWidth={1.5} className="text-copper-ink mt-0.5 shrink-0" />
                     <span>{loc.address}</span>
                   </div>
                   <div className="flex items-start gap-3 text-sm">
-                    <Phone size={16} strokeWidth={1.5} className="text-copper mt-0.5 shrink-0" />
-                    <span>{loc.phone}</span>
+                    <Phone size={16} strokeWidth={1.5} className="text-copper-ink mt-0.5 shrink-0" />
+                    <a href={`tel:${loc.phone.replace(/[^0-9+]/g, "")}`} className="hover:text-copper-ink">{loc.phone}</a>
                   </div>
                   <div className="flex items-start gap-3 text-sm">
-                    <Clock size={16} strokeWidth={1.5} className="text-copper mt-0.5 shrink-0" />
+                    <Clock size={16} strokeWidth={1.5} className="text-copper-ink mt-0.5 shrink-0" />
                     <div>
                       {loc.hours.map((h) => (
                         <p key={h.days}>
@@ -80,6 +95,15 @@ export default function LocationsPage() {
                     </div>
                   </div>
                 </div>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.address)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-8 inline-flex items-center gap-1.5 text-[0.75rem] uppercase tracking-[0.14em] link-underline"
+                >
+                  Get directions <ArrowUpRight size={14} aria-hidden />
+                  <span className="sr-only">(opens Google Maps)</span>
+                </a>
               </div>
             </div>
           ))}

@@ -17,9 +17,9 @@ export function Reviews() {
           {testimonials.map((t, i) => (
             <figure
               key={t.author}
-              className={i === 1 ? "lg:mt-10" : ""}
+              className={i === 1 ? "lg:mt-10 reveal" : "reveal"}
             >
-              <Quote size={28} strokeWidth={1} className="text-copper mb-5" />
+              <Quote size={28} strokeWidth={1} className="text-copper-ink mb-5" />
               <blockquote className="font-display text-xl leading-snug text-espresso">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
